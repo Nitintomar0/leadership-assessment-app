@@ -3,13 +3,13 @@ const express = require("express");
 const cors = require("cors");
 
 const dotenv = require("dotenv");
+const { Resend } = require("resend");
 
-const nodemailer = require("nodemailer");
 
 // Load environment variables
 dotenv.config();
 
-
+const resend = new Resend(process.env.RESEND_API_KEY);
 // Initialize express app
 const app = express();
 
@@ -27,13 +27,7 @@ app.use(express.json());
 // Port
 const PORT = process.env.PORT || 5000;
 
-const transporter = nodemailer.createTransport({
-    service: "gmail",
-    auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASS
-    }
-});
+
 
 
 
@@ -75,14 +69,13 @@ app.post("/submit-assessment", async (req, res) => {
 
         }
 
+        await resend.emails.send({
 
-        await transporter.sendMail({
-
-    from: process.env.EMAIL_USER,
+    from: "onboarding@resend.dev",
 
     to: email,
 
-    subject: "Your Leadership Assessment Report",
+    subject: "Leadership Assessment Report",
 
     html: `
 
@@ -108,78 +101,24 @@ app.post("/submit-assessment", async (req, res) => {
             Leadership Assessment Report
         </h1>
 
-        <p style="
-            font-size:16px;
-            line-height:1.8;
-        ">
-            Hello <strong>${name}</strong>,
-        </p>
+        <p>Hello <strong>${name}</strong>,</p>
 
-        <p style="
-            font-size:16px;
-            line-height:1.8;
-        ">
+        <p>
             Thank you for completing your leadership assessment.
-            Your personalized report has been generated successfully.
         </p>
 
-        <div style="
-            background:#eef4ff;
-            padding:25px;
-            border-radius:12px;
-            margin-top:25px;
-            margin-bottom:25px;
-        ">
+        <p>
+            <strong>Total Score:</strong> ${totalScore}
+        </p>
 
-            <h2 style="
-                color:#1f3c88;
-                margin-bottom:20px;
-            ">
-                Assessment Summary
-            </h2>
+        <p>
+            <strong>Leadership Level:</strong>
+            ${leadershipBand}
+        </p>
 
-            <p>
-                <strong>Total Score:</strong>
-                ${totalScore}
-            </p>
-
-            <p>
-                <strong>Leadership Level:</strong>
-                ${leadershipBand}
-            </p>
-
-            <p>
-                <strong>Feedback:</strong>
-                ${feedbackMessage}
-            </p>
-
-        </div>
-
-        <a
-            href="http://127.0.0.1:3000/frontend/result.html"
-            style="
-                display:inline-block;
-                background:#1f3c88;
-                color:white;
-                padding:14px 24px;
-                border-radius:10px;
-                text-decoration:none;
-                font-weight:bold;
-                margin-top:10px;
-            "
-        >
-            View Leadership Dashboard
-        </a>
-
-        <p style="
-            margin-top:40px;
-            color:#666;
-            line-height:1.7;
-            font-size:14px;
-        ">
-            This assessment was generated automatically based on your submitted responses.
-            Continue developing your leadership skills through consistent learning,
-            communication, and strategic thinking.
+        <p>
+            <strong>Feedback:</strong>
+            ${feedbackMessage}
         </p>
 
     </div>
