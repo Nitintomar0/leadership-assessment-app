@@ -236,55 +236,6 @@ localStorage.setItem(
 
 window.location.href = "result.html";
 
-
-
-    const data = await response.json();
-
-    console.log(data);
-
-    if(response.ok){
-
-        localStorage.setItem(
-            "assessmentData",
-
-            JSON.stringify({
-
-                name,
-                email,
-                answers,
-
-                totalScore,
-
-                leadershipBand,
-
-                feedbackMessage,
-
-                decisionScore,
-                communicationScore,
-                strategicScore,
-
-                decisionResult,
-                communicationResult,
-                strategicResult
-            })
-        );
-
-        form.reset();
-
-        submitBtn.textContent = "Success!";
-
-        window.location.href = "result.html";
-
-    }else{
-
-        errorMessage.textContent =
-            data.message || "Something went wrong.";
-
-        submitBtn.disabled = false;
-
-        submitBtn.textContent = "Submit Assessment";
-    }
-
 }catch(error){
 
     console.log(error);
