@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assessment Result</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+
+        .result-container{
+            max-width: 1000px;
+            margin: auto;
+            background: white;
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+        }
+
+        .summary-card{
+            background: #eef4ff;
+            padding: 30px;
+            border-radius: 14px;
+            margin-bottom: 30px;
+        }
+
+        .summary-card h1{
+            color: #1f3c88;
+            margin-bottom: 20px;
+        }
+
+        .summary-card p{
+            margin-bottom: 12px;
+            font-size: 16px;
+        }
+
+        .dimension-card{
+            background: #f9fbff;
+            border: 1px solid #dfe7f7;
+            padding: 25px;
+            border-radius: 14px;
+            margin-bottom: 20px;
+        }
+
+        .dimension-card h2{
+            color: #1f3c88;
+            margin-bottom: 15px;
+        }
+
+        .review-section{
+            margin-top: 40px;
+        }
+
+        .question-review{
+            background: #ffffff;
+            border: 1px solid #ddd;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+        }
+
+        .question-review h3{
+            color: #1f3c88;
+            margin-bottom: 12px;
+            line-height: 1.5;
+        }
+
+        .question-review p{
+            margin-bottom: 8px;
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <div class="result-container">
+
+        <div class="summary-card">
+
+            <h1>Leadership Assessment Report</h1>
+
+            <p>
+                <strong>Name:</strong>
+                <span id="userName"></span>
+            </p>
+
+            <p>
+                <strong>Overall Score:</strong>
+                <span id="overallScore"></span>
+            </p>
+
+            <p>
+                <strong>Leadership Level:</strong>
+                <span id="overallBand"></span>
+            </p>
+
+            <p id="overallFeedback"></p>
+
+            <p>
+                Your personalized leadership report has been emailed successfully.
+            </p>
+
+        </div>
+
+
+        <!-- Decision Making -->
+        <div class="dimension-card">
+
+            <h2>Decision Making</h2>
+
+            <p>
+                <strong>Score:</strong>
+                <span id="decisionScore"></span>
+            </p>
+
+            <p>
+                <strong>Level:</strong>
+                <span id="decisionBand"></span>
+            </p>
+
+            <p id="decisionFeedback"></p>
+
+        </div>
+
+
+        <!-- Communication -->
+        <div class="dimension-card">
+
+            <h2>Team Communication</h2>
+
+            <p>
+                <strong>Score:</strong>
+                <span id="communicationScore"></span>
+            </p>
+
+            <p>
+                <strong>Level:</strong>
+                <span id="communicationBand"></span>
+            </p>
+
+            <p id="communicationFeedback"></p>
+
+        </div>
+
+
+        <!-- Strategic -->
+        <div class="dimension-card">
+
+            <h2>Strategic Thinking</h2>
+
+            <p>
+                <strong>Score:</strong>
+                <span id="strategicScore"></span>
+            </p>
+
+            <p>
+                <strong>Level:</strong>
+                <span id="strategicBand"></span>
+            </p>
+
+            <p id="strategicFeedback"></p>
+
+        </div>
+
+
+        <!-- Review Section -->
+
+        <div class="review-section">
+
+            <h1 style="margin-bottom:30px;color:#1f3c88;">
+                Detailed Question Analysis
+            </h1>
+
+            <div id="questionReviewContainer"></div>
+
+        </div>
+
+    </div>
+
+    <script src="result.js"></script>
+
+</body>
+</html>
