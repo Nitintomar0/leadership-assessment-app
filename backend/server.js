@@ -5,6 +5,8 @@ const cors = require("cors");
 const dotenv = require("dotenv");
 const { Resend } = require("resend");
 
+const nodemailer = require("nodemailer");
+
 
 // Load environment variables
 dotenv.config();
@@ -27,7 +29,13 @@ app.use(express.json());
 // Port
 const PORT = process.env.PORT || 5000;
 
-
+const transporter = nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS
+    }
+});
 
 
 
