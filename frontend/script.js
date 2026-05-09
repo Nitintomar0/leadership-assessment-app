@@ -223,89 +223,65 @@ if(totalScore <= 20){
     }
 );
 
-const data = await response.json();
-
-console.log(data);
-
-if(response.ok){
-
-    localStorage.setItem("assessmentResult", JSON.stringify({
-        name,
-        email,
-        totalScore,
-        leadershipBand,
-        feedbackMessage
-    }));
-
-    window.location.href = "result.html";
-
-}else{
-
-    errorMessage.textContent = data.message || "Something went wrong.";
-
-    submitBtn.disabled = false;
-
-    submitBtn.textContent = "Submit Assessment";
-}
-
-        // Convert response
-        const data = await response.json();
-
-        // If backend success
-        if(response.ok){
-
-            // Store assessment data
-localStorage.setItem(
-    "assessmentData",
-
-    JSON.stringify({
-
-        name,
-
-        answers,
-
-        totalScore,
-
-        leadershipBand,
-
-        feedbackMessage,
-
-        decisionScore,
-        communicationScore,
-        strategicScore,
-
-        decisionResult,
-        communicationResult,
-        strategicResult
-    })
-);
 
 
-// Reset form
-form.reset();
+    const data = await response.json();
 
-submitBtn.textContent = "Success!";
-// Redirect to result page
-window.location.href = "result.html";
+    console.log(data);
 
-        }else{
+    if(response.ok){
 
-            errorMessage.textContent =
-                data.message || "Something went wrong.";
-        }
+        localStorage.setItem(
+            "assessmentData",
 
-    }catch(error){
+            JSON.stringify({
+
+                name,
+                email,
+                answers,
+
+                totalScore,
+
+                leadershipBand,
+
+                feedbackMessage,
+
+                decisionScore,
+                communicationScore,
+                strategicScore,
+
+                decisionResult,
+                communicationResult,
+                strategicResult
+            })
+        );
+
+        form.reset();
+
+        submitBtn.textContent = "Success!";
+
+        window.location.href = "result.html";
+
+    }else{
+
+        errorMessage.textContent =
+            data.message || "Something went wrong.";
+
+        submitBtn.disabled = false;
+
+        submitBtn.textContent = "Submit Assessment";
+    }
+
+}catch(error){
 
     console.log(error);
 
     errorMessage.textContent =
-        "Backend server is not responding. Wait 30 seconds and try again.";
+        "Backend server is not responding.";
 
     submitBtn.disabled = false;
 
     submitBtn.textContent = "Submit Assessment";
-    
 }
-
     
 });
