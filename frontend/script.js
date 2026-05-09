@@ -204,7 +204,7 @@ if(totalScore <= 20){
 
         // Send data to backend
         const response = await fetch(
-            "http://localhost:5000/submit-assessment",
+            "https://leadership-backend-u2iq.onrender.com/submit-assessment",
             {
                 method: "POST",
                 headers: {
