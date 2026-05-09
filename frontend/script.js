@@ -206,22 +206,47 @@ if(totalScore <= 20){
 
         // Send data to backend
         const response = await fetch(
-            "https://leadership-backend-u2iq.onrender.com/submit-assessment",
-            {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({
-                    name,
-                    email,
-                    answers,
-                    totalScore,
-                    leadershipBand,
-                    feedbackMessage
-                })
-            }
-        );
+    "https://leadership-backend-u2iq.onrender.com/submit-assessment",
+    {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            name,
+            email,
+            answers,
+            totalScore,
+            leadershipBand,
+            feedbackMessage
+        })
+    }
+);
+
+const data = await response.json();
+
+console.log(data);
+
+if(response.ok){
+
+    localStorage.setItem("assessmentResult", JSON.stringify({
+        name,
+        email,
+        totalScore,
+        leadershipBand,
+        feedbackMessage
+    }));
+
+    window.location.href = "result.html";
+
+}else{
+
+    errorMessage.textContent = data.message || "Something went wrong.";
+
+    submitBtn.disabled = false;
+
+    submitBtn.textContent = "Submit Assessment";
+}
 
         // Convert response
         const data = await response.json();
@@ -274,12 +299,13 @@ window.location.href = "result.html";
     console.log(error);
 
     errorMessage.textContent =
-        "Server is starting. Please wait 30 seconds and try again.";
+        "Backend server is not responding. Wait 30 seconds and try again.";
 
-}
-
-    // Enable button again
     submitBtn.disabled = false;
 
     submitBtn.textContent = "Submit Assessment";
+    
+}
+
+    
 });
