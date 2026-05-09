@@ -217,7 +217,7 @@ if(totalScore <= 20){
         total_score: totalScore,
         leadership_band: leadershipBand,
         feedback: feedbackMessage,
-        email: email
+        to_email: email
     }
 );
 localStorage.setItem(
