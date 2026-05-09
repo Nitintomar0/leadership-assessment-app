@@ -5,7 +5,11 @@ const errorMessage = document.getElementById("errorMessage");
 const resultBox = document.getElementById("resultBox");
 
 const submitBtn = document.getElementById("submitBtn");
-emailjs.init("mOLZOAaHX1r41nMe0");
+(function () {
+    emailjs.init({
+        publicKey: "mOLZOAaHX1r41nMe0",
+    });
+})();
 
 // Form Submit Event
 form.addEventListener("submit", async function(event){
@@ -241,7 +245,7 @@ window.location.href = "result.html";
     console.log(error);
 
     errorMessage.textContent =
-        "Backend server is not responding.";
+        "Email service failed.";
 
     submitBtn.disabled = false;
 
