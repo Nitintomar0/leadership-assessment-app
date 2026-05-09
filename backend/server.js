@@ -15,7 +15,11 @@ const app = express();
 
 
 // Middleware
-app.use(cors());
+app.use(cors({
+    origin: "*",
+    methods: ["GET", "POST"],
+    credentials: true
+}));
 
 app.use(express.json());
 
@@ -200,7 +204,9 @@ app.post("/submit-assessment", async (req, res) => {
         });
     }
 });
-
+app.get("/submit-assessment", (req, res) => {
+    res.send("Assessment API Working");
+});
 
 // Start Server
 app.listen(PORT, () => {
