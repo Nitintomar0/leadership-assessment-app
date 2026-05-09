@@ -5,7 +5,7 @@ const errorMessage = document.getElementById("errorMessage");
 const resultBox = document.getElementById("resultBox");
 
 const submitBtn = document.getElementById("submitBtn");
-
+emailjs.init("mOLZOAaHX1r41nMe0");
 
 // Form Submit Event
 form.addEventListener("submit", async function(event){
@@ -204,24 +204,37 @@ if(totalScore <= 20){
 
     try{
 
-        // Send data to backend
-        const response = await fetch(
-    "https://leadership-backend-u2iq.onrender.com/submit-assessment",
+        
+        await emailjs.send(
+    "service_wmt7rln",
+    "template_eqdz8pp",
     {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-            name,
-            email,
-            answers,
-            totalScore,
-            leadershipBand,
-            feedbackMessage
-        })
+        user_name: name,
+        total_score: totalScore,
+        leadership_band: leadershipBand,
+        feedback: feedbackMessage,
+        email: email
     }
 );
+localStorage.setItem(
+    "assessmentData",
+    JSON.stringify({
+        name,
+        email,
+        answers,
+        totalScore,
+        leadershipBand,
+        feedbackMessage,
+        decisionScore,
+        communicationScore,
+        strategicScore,
+        decisionResult,
+        communicationResult,
+        strategicResult
+    })
+);
+
+window.location.href = "result.html";
 
 
 
