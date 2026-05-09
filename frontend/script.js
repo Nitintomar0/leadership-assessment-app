@@ -199,6 +199,8 @@ if(totalScore <= 20){
     submitBtn.disabled = true;
 
     submitBtn.textContent = "Submitting...";
+    errorMessage.textContent =
+    "Please wait while we submit your assessment...";
 
     try{
 
@@ -257,7 +259,7 @@ localStorage.setItem(
 // Reset form
 form.reset();
 
-
+submitBtn.textContent = "Success!";
 // Redirect to result page
 window.location.href = "result.html";
 
@@ -269,11 +271,12 @@ window.location.href = "result.html";
 
     }catch(error){
 
-        console.log(error);
+    console.log(error);
 
-        errorMessage.textContent =
-            "Server error. Please try again later.";
-    }
+    errorMessage.textContent =
+        "Server is starting. Please wait 30 seconds and try again.";
+
+}
 
     // Enable button again
     submitBtn.disabled = false;
