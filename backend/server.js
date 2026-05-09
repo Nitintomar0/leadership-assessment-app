@@ -3,7 +3,6 @@ const express = require("express");
 const cors = require("cors");
 
 const dotenv = require("dotenv");
-const { Resend } = require("resend");
 
 const nodemailer = require("nodemailer");
 
@@ -11,7 +10,6 @@ const nodemailer = require("nodemailer");
 // Load environment variables
 dotenv.config();
 
-const resend = new Resend(process.env.RESEND_API_KEY);
 // Initialize express app
 const app = express();
 
@@ -77,9 +75,9 @@ app.post("/submit-assessment", async (req, res) => {
 
         }
 
-        await resend.emails.send({
+        await transporter.sendMail({
 
-    from: "onboarding@resend.dev",
+    from: process.env.EMAIL_USER,
 
     to: email,
 
